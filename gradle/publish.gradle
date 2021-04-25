@@ -29,29 +29,29 @@ afterEvaluate { project ->
             mavenDeployer {
                 def preferredRepo = project.findProperty('preferredRepo')
                 println "preferredRepo=$preferredRepo"
-
-                if (preferredRepo == 'local') {
-                    repository url: repositories.mavenLocal().url
-                } else if (preferredRepo != null
-                        && project.hasProperty('preferredUsername')
-                        && project.hasProperty('preferredPassword')) {
-                    configuration = configurations.deployerJars
-                    repository(url: repositoryUrl) {
-                        authentication(userName: preferredUsername, password: preferredPassword)
-                    }
-                } else if (project.hasProperty('sonatypeUsername')
-                        && project.hasProperty('sonatypePassword')) {
-                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-                    def isSnapshot = version.endsWith('-SNAPSHOT')
-                    def sonatypeRepositoryUrl = isSnapshot
-                            ? "https://oss.sonatype.org/content/repositories/snapshots/"
-                            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-                    repository(url: sonatypeRepositoryUrl) {
-                        authentication(userName: sonatypeUsername, password: sonatypePassword)
-                    }
-                } else {
-                    println "Deployment settings missing/incomplete for ${project.name}."
-                }
+                repository(url:mavenLocal().url)
+//                if (preferredRepo == 'local') {
+//                    repository url: repositories.mavenLocal().url
+//                } else if (preferredRepo != null
+//                        && project.hasProperty('preferredUsername')
+//                        && project.hasProperty('preferredPassword')) {
+//                    configuration = configurations.deployerJars
+//                    repository(url: repositoryUrl) {
+//                        authentication(userName: preferredUsername, password: preferredPassword)
+//                    }
+//                } else if (project.hasProperty('sonatypeUsername')
+//                        && project.hasProperty('sonatypePassword')) {
+//                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+//                    def isSnapshot = version.endsWith('-SNAPSHOT')
+//                    def sonatypeRepositoryUrl = isSnapshot
+//                            ? "https://oss.sonatype.org/content/repositories/snapshots/"
+//                            : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+//                    repository(url: sonatypeRepositoryUrl) {
+//                        authentication(userName: sonatypeUsername, password: sonatypePassword)
+//                    }
+//                } else {
+//                    println "Deployment settings missing/incomplete for ${project.name}."
+//                }
 
                 // Common properties, projects still need to set name and description.
                 pom.project {

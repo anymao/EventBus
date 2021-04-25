@@ -1,8 +1,8 @@
 apply plugin: 'java'
 
 archivesBaseName = 'eventbus-annotation-processor'
-group = 'org.greenrobot'
-version = '3.2.0'
+group = archivesGroup
+version = archivesVersion
 
 sourceCompatibility = 1.7
 
