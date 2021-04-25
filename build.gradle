@@ -2,7 +2,7 @@ buildscript {
     ext {
         _compileSdkVersion = 26 // When updating, don't forget to adjust .travis.yml.
         archivesGroup = 'org.greenrobot'
-        archivesVersion = '3.2.0'
+        archivesVersion = '3.2.1'
     }
 
     repositories{
