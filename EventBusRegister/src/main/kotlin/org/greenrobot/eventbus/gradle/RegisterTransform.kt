@@ -64,12 +64,13 @@ class RegisterTransform internal constructor(private val project: Project, priva
                 FileUtils.copyDirectory(dir.file, dest)
             }
         }
-        logger.tell("transform end,with[${System.currentTimeMillis() - start}ms]")
+        logger.tell("find impl end,with${mScannedIndexes.size} result in[${System.currentTimeMillis() - start}ms]")
         val builderClass = mScanner.eventBusBuilderClass
         if (builderClass != null && mScannedIndexes.isNotEmpty()){
             logger.i("modify jar of:${builderClass.name}")
             RegisterCodeGenerator(logger).insert(builderClass, mScannedIndexes)
         }
+        logger.tell("transform end,in[${System.currentTimeMillis() - start}ms]")
     }
 
 

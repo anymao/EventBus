@@ -10,7 +10,7 @@ buildscript {
 }
 
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.eventbus.register'
+//apply plugin: 'org.greenrobot.eventbus.register'
 
 dependencies {
     implementation project(':eventbus')

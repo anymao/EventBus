@@ -55,7 +55,7 @@ internal class RegisterCodeGenerator(private val logger: Logger) {
         return inputStream.use {
             val cr = ClassReader(it)
             val cw = ClassWriter(cr, 0)
-            val visitor = InsertClassVisitor(Opcodes.ASM5, cw, scannedIndexClasses)
+            val visitor = InsertClassVisitor(Opcodes.ASM6, cw, scannedIndexClasses)
             cr.accept(visitor, ClassReader.EXPAND_FRAMES)
             cw.toByteArray()
         }
@@ -65,7 +65,7 @@ internal class RegisterCodeGenerator(private val logger: Logger) {
         override fun visitMethod(access: Int, name: String?, descriptor: String?, signature: String?, exceptions: Array<out String>?): MethodVisitor {
             var mv = super.visitMethod(access, name, descriptor, signature, exceptions)
             if (name == CLASS_STATIC_BLOCK) {
-                mv = InsertMethodVisitor(Opcodes.ASM5, mv, scannedIndexClasses)
+                mv = InsertMethodVisitor(Opcodes.ASM6, mv, scannedIndexClasses)
             }
             return mv
         }

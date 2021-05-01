@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "org.greenrobot:eventbus-register:$archivesVersion"
+//        classpath "org.greenrobot:eventbus-register:$archivesVersion"
     }
 }
 

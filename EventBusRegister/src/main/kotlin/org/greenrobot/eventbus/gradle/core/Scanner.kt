@@ -22,7 +22,7 @@ internal class Scanner(private val logger: Logger, private val mScannedIndexClas
     }
 
     fun shouldProcessClass(className: String): Boolean {
-        return true
+        return className.endsWith(".class")
     }
 
     fun scanJar(src: File, dest: File) {
@@ -52,7 +52,7 @@ internal class Scanner(private val logger: Logger, private val mScannedIndexClas
         input.use {
             val cr = ClassReader(it)
             val cw = ClassWriter(cr, 0)
-            val visitor = EventBusInfoIndexClassVisitor(Opcodes.ASM5, cw)
+            val visitor = EventBusInfoIndexClassVisitor(Opcodes.ASM6, cw)
             cr.accept(visitor, ClassReader.EXPAND_FRAMES)
         }
     }
